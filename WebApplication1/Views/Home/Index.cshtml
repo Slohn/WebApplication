@@ -1,0 +1,26 @@
+﻿@using Entities;
+@model List<Order>;
+@{
+    ViewData["Title"] = "Главная страница";
+}
+
+<!--Фильтр-->
+
+<table>
+  <tr>
+    <td>Номер</td>
+    <td>Дата</td>
+    <td>Провайдер</td>
+    <td>Действие</td>
+  </tr>
+  @foreach(var el in Model)
+    {
+       <tr>
+            <td>@el.Number</td>
+            <td>@el.Date</td>
+            <td>@el.Id</td>
+            <td><a href="#">изменить</a></td>
+       </tr> 
+    }
+</table>
+
