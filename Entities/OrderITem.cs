@@ -17,5 +17,16 @@ namespace Entities
         public decimal Quantity { get; set; }
         public string Unit { get; set; }
 
+        public OrderItem() { }
+
+        public OrderItem(int id, int orderId, string name, decimal quantity, string unit) 
+        {
+            Id = id;
+            OrderId = orderId;
+            Name = name;
+            Unit = unit;
+            Quantity = quantity;
+        }
+
     }
 }

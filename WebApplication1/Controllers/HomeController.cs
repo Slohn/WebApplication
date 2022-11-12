@@ -44,6 +44,7 @@ namespace WebApplication1.Controllers
             {
                 return View(model);
             }
+
             await _service.AddAsync(OrderModel.ToEntity(model));
             return RedirectToAction("Index");
         }

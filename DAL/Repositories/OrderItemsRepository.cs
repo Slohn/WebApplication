@@ -119,6 +119,10 @@ namespace DAL.Repositories
                 : new OrderItem()
                 {
                     Id = order.Id,
+                    Name = order.Name,
+                    Unit = order.Unit,
+                    Quantity = order.Quantity,
+                    OrderId = order.OrderId
                 };
         }
 
@@ -129,6 +133,10 @@ namespace DAL.Repositories
                 : new Entities.OrderItem()
                 {
                     Id = order.Id,
+                    Name = order.Name,
+                    Unit = order.Unit,
+                    Quantity = order.Quantity,
+                    OrderId = order.OrderId
                 };
         }
     }

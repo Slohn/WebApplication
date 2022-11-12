@@ -1,16 +1,14 @@
 ﻿@using Entities;
 @model Order
-@{
-    Layout = null;
-}
 
-<input type = "text" placeholder="@Model.Number"/>
-<input type = "date" placeholder="@Model.Date"/>
-@*<select>
-    @foreach(var el in Model.)
-    {
-        <option value="@el.Id">@el.Name</option>
-    }
-</select>*@
 
-<script></script>
+<input type="hidden" asp-for="Id"/>
+<label asp-for="Date"></label>
+<input type="text" asp-for="Date"/>
+<span asp-validation-for="Date" ></span>
+<label asp-for="Number"></label>
+<input type="text" asp-for="Number"/>
+<span asp-validation-for="Number" ></span>
+<select id="providerSelect">
+
+</select>

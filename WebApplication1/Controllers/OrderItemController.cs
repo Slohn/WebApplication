@@ -4,6 +4,7 @@ using WebApplication1.Models;
 using DAL.Repositories;
 using Common.Search;
 using BL;
+using UI.Models;
 
 namespace WebApplication1.Controllers
 {
@@ -24,19 +25,25 @@ namespace WebApplication1.Controllers
             return View(obj);
         }
 
-        public async Task<IActionResult> Update(OrderModel model)
+        public async Task<IActionResult> Update(OrderItemModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            await _service.AddAsync(model);
+            await _service.AddAsync(OrderItemModel.ToEntity(model));
             return RedirectToAction("Index");
         }
 
         public async void Delete(int id) 
         {
             await _service.DeleteAsync(id);
+        }
+
+        public async Task<JsonResult> AjaxProviders(string search) 
+        {
+
+            return Json();
         }
 
 
