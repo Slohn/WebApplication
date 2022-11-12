@@ -1,6 +1,6 @@
 ﻿namespace Common.Search
 {
-    public class OrderSearchParams
+    public class OrderSearchParams : BaseSearchParams
     {
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
