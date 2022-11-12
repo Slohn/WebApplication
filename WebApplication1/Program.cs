@@ -12,7 +12,9 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IRepository<Order>, OrdersRepository>();
+builder.Services.AddScoped<IRepository<OrderItem>, OrderItemsRepository>();
 builder.Services.AddScoped<OrderService, OrderService>();
+builder.Services.AddScoped<OrderItemService, OrderItemService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

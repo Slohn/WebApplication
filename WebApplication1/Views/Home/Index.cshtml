@@ -11,7 +11,8 @@
     <td>Номер</td>
     <td>Дата</td>
     <td>Провайдер</td>
-    <td>Действие</td>
+    <td>Изменить</td>
+    <td>Удалить</td>
   </tr>
   @foreach(var el in Model)
     {
@@ -19,8 +20,11 @@
             <td>@el.Number</td>
             <td>@el.Date</td>
             <td>@el.Id</td>
-            <td><a href="#">изменить</a></td>
+            <td><a href="@Url.ActionLink("Update", "Home", new {id = @el.Id})">Изменить</a></td>
+            <td><a href="@Url.ActionLink("Delete", "Home", new {id = @el.Id})">Удалить</a></td>
        </tr> 
     }
 </table>
+
+<a href="@Url.ActionLink("Add", "Home")">Добавить</a>
 

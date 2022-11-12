@@ -16,6 +16,7 @@ namespace DAL.Models
         public DateTime Date { get; set; }
         public int ProviderId { get; set; }
         public Provider Provider { get; set; }
+        public IEnumerable<OrderItem> OrderItems { get; set; }
 
     }
 }

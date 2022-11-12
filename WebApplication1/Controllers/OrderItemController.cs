@@ -4,32 +4,18 @@ using WebApplication1.Models;
 using DAL.Repositories;
 using Common.Search;
 using BL;
-using UI.Models;
 
 namespace WebApplication1.Controllers
 {
-    public class HomeController : Controller
+    public class OrderItemController : Controller
     {
         private readonly ILogger<HomeController> _logger;
 
-        private readonly OrderService _service;
+        private readonly OrderItemService _service;
 
-        public HomeController(OrderService service)
+        public OrderItemController(OrderItemService service)
         {
             _service = service;
-        }
-
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
-
-        
-
-        public async Task<IActionResult>Index(int page = 1)
-        {
-            var obj = await _service.GetAllAsync();
-            return View(obj);
         }
 
         public async Task<IActionResult> Update(int? id)
@@ -44,7 +30,7 @@ namespace WebApplication1.Controllers
             {
                 return View(model);
             }
-            await _service.AddAsync(OrderModel.ToEntity(model));
+            await _service.AddAsync(model);
             return RedirectToAction("Index");
         }
 
@@ -53,16 +39,6 @@ namespace WebApplication1.Controllers
             await _service.DeleteAsync(id);
         }
 
-        public async Task<IActionResult> Index(OrderSearchParams searchParams)
-        {
-            var obj = await _service.GetAsync(searchParams);
-            return View(obj);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
