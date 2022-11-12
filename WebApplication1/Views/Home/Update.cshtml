@@ -1,6 +1,7 @@
-﻿@using Entities;
-@model Order
+﻿@using UI.Models; 
+@model OrderModel
 
+<form asp-action="Update" method="post">
 
 <input type="hidden" asp-for="Id"/>
 <label asp-for="Date"></label>
@@ -12,3 +13,6 @@
 <select id="providerSelect">
 
 </select>
+
+<button type="submit">Сохранить</button>
+</form>

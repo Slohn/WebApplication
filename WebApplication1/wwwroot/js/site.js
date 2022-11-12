@@ -1,6 +1,6 @@
 ﻿$("#schoolsSelect").select2({
 	ajax: {
-		url: "/OrderItem/AjaxSchools",
+		url: "/OrderItem/Ajax",
 		dataType: "json",
 		delay: 500,
 		data: (params) => {

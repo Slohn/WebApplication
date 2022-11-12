@@ -40,11 +40,11 @@ namespace WebApplication1.Controllers
             await _service.DeleteAsync(id);
         }
 
-        public async Task<JsonResult> AjaxProviders(string search) 
-        {
+        //public async Task<JsonResult> AjaxProviders(string search) 
+        //{
 
-            return Json();
-        }
+        //    return Json();
+        //}
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

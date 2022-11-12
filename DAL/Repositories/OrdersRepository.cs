@@ -129,13 +129,13 @@ namespace DAL.Repositories
         {
             return order == null
                 ? null
-                : new Entities.Order()
-                {
-                    Id = order.Id,
-                    Number = order.Number,
-                    Date = order.Date,
-                    ProviderId = order.ProviderId
-                };
+                : new Entities.Order
+                (
+                    order.Id,
+                    order.Number,
+                    order.Date,
+                    order.ProviderId
+                );
         }
     }
 }

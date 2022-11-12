@@ -34,10 +34,17 @@ namespace WebApplication1.Controllers
 
         public async Task<IActionResult> Update(int? id)
         {
-            var obj = await _service.GetByIdAsync(id.Value);
-            return View(obj);
+            var model = new OrderModel();
+            if (id != null) 
+            {
+                model = OrderModel.FromEntity(await _service.GetByIdAsync(id.Value));
+                if (model == null)
+                    return NotFound();
+            }
+            return View(model);
         }
 
+        [HttpPost]
         public async Task<IActionResult> Update(OrderModel model)
         {
             if (!ModelState.IsValid)
@@ -54,6 +61,7 @@ namespace WebApplication1.Controllers
             await _service.DeleteAsync(id);
         }
 
+        [HttpPost]
         public async Task<IActionResult> Index(OrderSearchParams searchParams)
         {
             var obj = await _service.GetAsync(searchParams);
