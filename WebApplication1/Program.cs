@@ -13,8 +13,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 
 builder.Services.AddScoped<IRepository<Order>, OrdersRepository>();
 builder.Services.AddScoped<IRepository<OrderItem>, OrderItemsRepository>();
+builder.Services.AddScoped<IRepository<Provider>, ProvidersRepository>();
 builder.Services.AddScoped<OrderService, OrderService>();
 builder.Services.AddScoped<OrderItemService, OrderItemService>();
+builder.Services.AddScoped<ProviderService, ProviderService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

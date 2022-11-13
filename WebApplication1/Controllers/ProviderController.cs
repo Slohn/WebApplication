@@ -8,13 +8,13 @@ using UI.Models;
 
 namespace WebApplication1.Controllers
 {
-    public class HomeController : Controller
+    public class ProviderController : Controller
     {
         private readonly ILogger<HomeController> _logger;
 
-        private readonly OrderService _service;
+        private readonly ProviderService _service;
 
-        public HomeController(OrderService service)
+        public ProviderController(ProviderService service)
         {
             _service = service;
         }
@@ -24,7 +24,15 @@ namespace WebApplication1.Controllers
         //    _logger = logger;
         //}
 
-        
+
+        public async Task<JsonResult> AjaxProviders(string search) 
+        {
+            var res = await _service.GetAsync(new ProviderSearchParams
+            {
+                Name = search
+            });
+            return Json(res);
+        }
 
         public async Task<IActionResult>Index(int page = 1)
         {
@@ -34,10 +42,10 @@ namespace WebApplication1.Controllers
 
         public async Task<IActionResult> Update(int? id)
         {
-            var model = new OrderModel();
+            var model = new ProviderModel();
             if (id != null) 
             {
-                model = OrderModel.FromEntity(await _service.GetByIdAsync(id.Value));
+                model = ProviderModel.FromEntity(await _service.GetByIdAsync(id.Value));
                 if (model == null)
                     return NotFound();
             }
@@ -45,28 +53,22 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(OrderModel model)
+        public async Task<IActionResult> Update(ProviderModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            await _service.AddAsync(OrderModel.ToEntity(model));
+            await _service.AddAsync(ProviderModel.ToEntity(model));
             return RedirectToAction("Index");
         }
 
-        public async Task Delete(int id) 
+        public async void Delete(int id) 
         {
             await _service.DeleteAsync(id);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Index(OrderSearchParams searchParams)
-        {
-            var obj = await _service.GetAsync(searchParams);
-            return View(obj);
-        }
 
         public IActionResult Privacy()
         {
