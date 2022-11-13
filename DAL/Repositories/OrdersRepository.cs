@@ -47,7 +47,8 @@ namespace DAL.Repositories
             {
                 if (order != null)
                 {
-                    _appDbContext.Remove(ConvertFromEntity(order));
+                    _appDbContext.Entry(ConvertFromEntity(order)).State = EntityState.Detached;
+                    _appDbContext.Orders.Remove(ConvertFromEntity(order));
                     await _appDbContext.SaveChangesAsync();
                 }
             }
@@ -61,7 +62,7 @@ namespace DAL.Repositories
         {
             try
             {
-                var obj = await _appDbContext.Orders.ToListAsync();
+                var obj = await _appDbContext.Orders.Include(item => item.Provider).ToListAsync();
                 return obj.Select(ConvertToEntity);
             }
             catch (Exception)
@@ -76,7 +77,7 @@ namespace DAL.Repositories
             {
                 if (Id != 0)
                 {
-                    var obj = await _appDbContext.Orders.FirstOrDefaultAsync(x => x.Id == Id);
+                    var obj = await _appDbContext.Orders.Include(item => item.Provider).FirstOrDefaultAsync(x => x.Id == Id);
                     return ConvertToEntity(obj);
                 }
                 else
@@ -135,7 +136,10 @@ namespace DAL.Repositories
                     order.Number,
                     order.Date,
                     order.ProviderId
-                );
+                )
+                {
+                    ProviderName = order.Provider.Name
+                };
         }
     }
 }

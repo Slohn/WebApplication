@@ -9,7 +9,11 @@ using BL;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(connectionString);
+    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+});
 
 builder.Services.AddScoped<IRepository<Order>, OrdersRepository>();
 builder.Services.AddScoped<IRepository<OrderItem>, OrderItemsRepository>();

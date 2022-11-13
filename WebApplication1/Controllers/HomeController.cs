@@ -56,9 +56,10 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task Delete(int id) 
+        public async Task<IActionResult> Delete(int id) 
         {
             await _service.DeleteAsync(id);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

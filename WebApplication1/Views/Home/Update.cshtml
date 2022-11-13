@@ -11,7 +11,7 @@
 <input type="text" asp-for="Number"/>
 <span asp-validation-for="Number" ></span>
 <select id="providerSelect" asp-for="ProviderId">
-
+    <option value="@Model.ProviderId">@Model.ProviderName</option>
 </select>
 
 <button type="submit">Сохранить</button>

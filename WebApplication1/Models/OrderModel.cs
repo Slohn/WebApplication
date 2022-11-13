@@ -9,13 +9,16 @@ namespace UI.Models
         public DateTime Date { get; set; }
         public int ProviderId { get; set; }
 
+        public string ProviderName { get; set; }
+
         public OrderModel() { }
-        public OrderModel(int id, string number, DateTime date, int providerId)
+        public OrderModel(int id, string number, DateTime date, int providerId, string providerName)
         {
             Id = id;
             Number = number;
             Date = date;
             ProviderId = providerId;
+            ProviderName = providerName;
         }
 
         public static Order ToEntity(OrderModel obj)
@@ -29,7 +32,7 @@ namespace UI.Models
         {
             return obj == null
                 ? null
-                : new OrderModel(obj.Id, obj.Number, obj.Date, obj.ProviderId);
+                : new OrderModel(obj.Id, obj.Number, obj.Date, obj.ProviderId, obj.ProviderName);
         }
     }
 }
