@@ -1,12 +1,12 @@
-﻿@using Entities;
-@model List<Order>;
+﻿@using UI.Models;
+@model SearchResultViewModel<OrderModel,OrderFilterModel>;
 @{
     ViewData["Title"] = "Главная страница";
 }
 
 <!--Фильтр-->
 
-
+<partial name="_Filter" for="FilterModel" />
 <!---->
 <a href="@Url.ActionLink("Update", "Home")">Добавить</a>
 
@@ -18,7 +18,7 @@
     <td>Изменить</td>
     <td>Удалить</td>
   </tr>
-  @foreach(var el in Model)
+  @foreach(var el in Model.Objects)
     {
        <tr>
             <td>@el.Number</td>

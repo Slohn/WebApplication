@@ -5,6 +5,7 @@ using DAL.Contracts;
 using DAL.Repositories;
 using Entities;
 using BL;
+using UI.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

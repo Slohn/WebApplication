@@ -35,6 +35,15 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<JsonResult> AjaxOrderItems(string search)
+        {
+            var res = await _service.GetAsync(new OrderItemSearchParams
+            {
+                Name = search
+            });
+            return Json(res);
+        }
+
         public async void Delete(int id) 
         {
             await _service.DeleteAsync(id);

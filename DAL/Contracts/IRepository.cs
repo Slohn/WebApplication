@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace DAL.Contracts
 {
-    public interface IRepository<T>
+    public interface IRepository<TModel>
     {
-        public Task<T> CreateAsync(T obj);
-        public Task DeleteAsync(T obj);
-        public Task<T> UpdateAsync(T obj);
-        public Task<IEnumerable<T>> GetAllAsync();
-        public Task<T> GetByIdAsync(int id);
+        public Task<TModel> CreateAsync(TModel obj);
+        public Task DeleteAsync(TModel obj);
+        public Task<TModel> UpdateAsync(TModel obj);
+        public Task<IEnumerable<TModel>> GetAllAsync();
+        public Task<TModel> GetByIdAsync(int id);
+        //public Task<IEnumerable<TModel>> GetAsync(TFilterModel filterModel);
     }
 }

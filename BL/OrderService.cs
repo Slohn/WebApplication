@@ -89,12 +89,16 @@ namespace BL
                 {
                     dbObjects = dbObjects.Where(i => i.ProviderId == searchParams.ProviderId);
                 }
+                if (!string.IsNullOrEmpty(searchParams.Unit)) 
+                {
+                    dbObjects = dbObjects.Where(item => item.OrderItems.Any(item => item.Unit == searchParams.Unit));
+                }
                 return new SearchResult<Order>
                 {
                     Total =  dbObjects.Count(),
                     RequestedObjectsCount = searchParams.ObjectsCount,
                     RequestedStartIndex = searchParams.StartIndex.Value,
-                    Objects = new List<Order>()
+                    Objects = dbObjects.ToList()
                 };
             }
             catch(Exception)

@@ -3,12 +3,12 @@
     public class SearchResultViewModel<TModel>
     {
         public IList<TModel> Objects { get; set; }
-        public PageInfoModel PageIngo { get; set; }   
+        public PageInfoModel PagesInfo { get; set; }   
 
         public SearchResultViewModel(IEnumerable<TModel> objects, int totalCount, int requestedSrartIndex,            int? requestedCount, int displayedPages)        {
             var pageSize = Math.Max(1,requestedCount ?? totalCount - requestedSrartIndex);
             Objects = objects.ToList();
-            PageIngo = new PageInfoModel(totalCount, pageSize, requestedSrartIndex/pageSize + 1, displayedPages);
+            PagesInfo = new PageInfoModel(totalCount, pageSize, requestedSrartIndex/pageSize + 1, displayedPages);
         }
 
     }

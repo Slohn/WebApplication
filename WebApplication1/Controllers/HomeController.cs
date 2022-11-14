@@ -26,10 +26,29 @@ namespace WebApplication1.Controllers
 
         
 
-        public async Task<IActionResult>Index(int page = 1)
+        public async Task<IActionResult>Index(OrderFilterModel filterModel, int page = 1)
         {
-            var obj = await _service.GetAllAsync();
-            return View(obj);
+            const int objectsPerPage = 20;
+            var searchResults = await _service.GetAsync(new OrderSearchParams
+            {
+                StartDate = filterModel.StartDate,
+                EndDate = filterModel.EndDate,
+                Number = filterModel.OrderNumber,
+                Unit = filterModel.Unit,
+                StartIndex = (page -1 ) * objectsPerPage,
+                ProviderId = filterModel.ProviderId,
+                OrderItemId = filterModel.OtderItemId
+            });
+            var result = new SearchResultViewModel<OrderModel, OrderFilterModel> 
+            (
+                OrderModel.FromEntitiesList(searchResults.Objects),
+                filterModel,
+                searchResults.Total,
+                searchResults.RequestedStartIndex,
+                searchResults.RequestedObjectsCount,
+                5
+            );
+            return View(result);
         }
 
         public async Task<IActionResult> Update(int? id)
@@ -62,12 +81,12 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Index(OrderSearchParams searchParams)
-        {
-            var obj = await _service.GetAsync(searchParams);
-            return View(obj);
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> Index(OrderSearchParams searchParams)
+        //{
+        //    var obj = await _service.GetAsync(searchParams);
+        //    return View(obj);
+        //}
 
         public IActionResult Privacy()
         {

@@ -72,9 +72,9 @@ namespace BL
             try 
             {
                 var dbObjects = await Repository.GetAllAsync();
-                if (!string.IsNullOrEmpty(searchParams.Name)) 
+                if (!string.IsNullOrEmpty(searchParams.Name))
                 {
-                    dbObjects = dbObjects.Where(i => i.Name == searchParams.Name);
+                    dbObjects = dbObjects.Where(item => item.Name.ToLower().StartsWith(searchParams.Name.ToLower()));
                 }
                 return dbObjects.ToList();
             }

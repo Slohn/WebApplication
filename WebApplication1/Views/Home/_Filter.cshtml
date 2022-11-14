@@ -1,3 +1,16 @@
 ﻿@using UI.Models;
 @model OrderFilterModel
 
+<form asp-action="Index" asp-controller="Home">
+    <label asp-for="OrderNumber">OrderNumber</label>
+    <input type="text" asp-for="OrderNumber"/>
+    <label asp-for="Unit">Unit</label>
+    <input type="text" asp-for="Unit"/>
+    <label asp-for="StartDate">StartDate</label>
+    <input type="date" asp-for="StartDate"/>
+    <label asp-for="EndDate">EndDate</label>
+    <input type="date" asp-for="EndDate"/>
+    <select id="providerSelect" asp-for="ProviderId"></select>
+    <select id="orderItemsSelect" asp-for="OtderItemId"></select>
+    <button type="submit">Применить</button>
+</form>

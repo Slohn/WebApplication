@@ -16,6 +16,7 @@ namespace Entities
         public DateTime Date { get; set; }
         public int ProviderId { get; set; }
         public string ProviderName { get; set; }
+        public List<OrderItem> OrderItems { get; set; }
 
         public Order(int id, string number, DateTime date, int providerId)
         {
