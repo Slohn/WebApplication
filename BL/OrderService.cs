@@ -2,6 +2,7 @@
 using DAL.Repositories;
 using Entities;
 using Common.Search;
+using Microsoft.EntityFrameworkCore;
 
 namespace BL
 {
@@ -67,7 +68,7 @@ namespace BL
 
         }
 
-        public async Task<IEnumerable<Order>> GetAsync(OrderSearchParams searchParams) 
+        public async Task<SearchResult<Order>> GetAsync(OrderSearchParams searchParams) 
         {
             try 
             {
@@ -88,7 +89,13 @@ namespace BL
                 {
                     dbObjects = dbObjects.Where(i => i.ProviderId == searchParams.ProviderId);
                 }
-                return dbObjects.ToList();
+                return new SearchResult<Order>
+                {
+                    Total =  dbObjects.Count(),
+                    RequestedObjectsCount = searchParams.ObjectsCount,
+                    RequestedStartIndex = searchParams.StartIndex.Value,
+                    Objects = new List<Order>()
+                };
             }
             catch(Exception)
             {
